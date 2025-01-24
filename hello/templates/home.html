@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 20%;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <img id="live-image" src="{{ image.image.url }}" alt="Načítá se obrázek...">
+
+    <script>
+        const imageElement = document.getElementById('live-image');
+
+        let currentImageUrl = "";
+
+        async function fetchImage() {
+            try {
+                const response = await fetch('/api/image/');
+                const data = await response.json();
+        
+                if (data.image_url && data.image_url !== currentImageUrl) {
+                    currentImageUrl = data.image_url; // Aktualizuj URL pouze při změně
+                    imageElement.src = currentImageUrl;
+                }
+            } catch (error) {
+                console.error('Chyba při načítání obrázku:', error);
+            }
+        }
+
+        // Načítej každé 3 sekundy, ale měň obrázek pouze při změně URL
+        setInterval(fetchImage, 2000);
+    </script>
+</body>
+</html>
