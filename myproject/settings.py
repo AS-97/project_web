@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-u39&v&#1@otex5vx6)t1-6#(4^jg2_*6%69kuadc5k63e@s8^_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] # '*' je pouze pro testování, je to bezpečnostní hrozba!!! později změnit na konkrétní url!!!
 
 
 # Application definition
